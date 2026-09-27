@@ -1,29 +1,37 @@
 <template>
-  <header class="header" :class="{ 'header-scrolled': scrolled }">
-    <nav class="container header-nav">
-      <router-link to="/" class="logo">&#60;dev&#47;&#62;</router-link>
+  <header class="header" :class="{ 'header-scrolled': scrolled }" role="banner">
+    <nav class="container header-nav" aria-label="Navegación principal">
+      <router-link to="/" class="logo" aria-label="Ir a la página principal">&#60;dev&#47;&#62;</router-link>
 
-      <button class="menu-toggle" @click="menuOpen = !menuOpen" aria-label="Menú">
-        <span class="menu-line" :class="{ open: menuOpen }"></span>
-        <span class="menu-line" :class="{ open: menuOpen }"></span>
-        <span class="menu-line" :class="{ open: menuOpen }"></span>
+      <button class="menu-toggle" @click="menuOpen = !menuOpen" :aria-expanded="menuOpen" aria-controls="main-menu" :title="menuOpen ? 'Cerrar menú' : 'Abrir menú'">
+        <span class="menu-line" :class="{ open: menuOpen }" aria-hidden="true"></span>
+        <span class="menu-line" :class="{ open: menuOpen }" aria-hidden="true"></span>
+        <span class="menu-line" :class="{ open: menuOpen }" aria-hidden="true"></span>
       </button>
 
-      <ul class="nav-links" :class="{ 'nav-open': menuOpen }">
-        <li><a href="/#about" @click="menuOpen = false">{{ t('nav.about') }}</a></li>
-        <li><a href="/#projects" @click="menuOpen = false">{{ t('nav.projects') }}</a></li>
-        <li><a href="/#skills" @click="menuOpen = false">{{ t('nav.skills') }}</a></li>
-        <li><a href="/#contact" @click="menuOpen = false">{{ t('nav.contact') }}</a></li>
-        <li class="nav-actions">
-          <button class="icon-btn" @click="toggleTheme()" :title="theme === 'dark' ? 'Modo claro' : 'Modo oscuro'">
-            <svg v-if="theme === 'dark'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      <ul class="nav-links" :class="{ 'nav-open': menuOpen }" id="main-menu" role="menubar">
+        <li role="none"><a href="/#about" @click="menuOpen = false" role="menuitem">{{ t('nav.about') }}</a></li>
+        <li role="none"><a href="/#projects" @click="menuOpen = false" role="menuitem">{{ t('nav.projects') }}</a></li>
+        <li role="none"><a href="/#skills" @click="menuOpen = false" role="menuitem">{{ t('nav.skills') }}</a></li>
+        <li role="none"><a href="/#contact" @click="menuOpen = false" role="menuitem">{{ t('nav.contact') }}</a></li>
+        <li class="nav-actions" role="none">
+          <button class="icon-btn" @click="toggleTheme()" :aria-label="theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro'" :title="theme === 'dark' ? 'Modo claro' : 'Modo oscuro'">
+            <svg v-if="theme === 'dark'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
             </svg>
-            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
-          <button class="icon-btn lang-btn" @click="setLocale(isES ? 'en' : 'es')">
+          <button class="icon-btn lang-btn" @click="setLocale(isES ? 'en' : 'es')" :aria-label="isES ? 'Cambiar idioma a inglés' : 'Cambiar idioma a español'">
             {{ isES ? 'EN' : 'ES' }}
           </button>
         </li>
@@ -98,6 +106,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   color: var(--text-secondary);
   transition: color 0.3s;
   position: relative;
+  text-decoration: none;
 }
 
 .nav-links a::after {
@@ -157,6 +166,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   border: none;
   cursor: pointer;
   padding: 4px;
+  outline: none;
 }
 
 .menu-line {

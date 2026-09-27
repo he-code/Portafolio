@@ -1,22 +1,22 @@
 <template>
   <div class="project-detail">
     <div class="container">
-      <router-link to="/" class="back-link">{{ t('projects.back') }}</router-link>
+      <router-link to="/" class="back-link" aria-label="Volver a la página principal">{{ t('projects.back') }}</router-link>
 
       <template v-if="project">
         <div class="detail-header reveal">
           <span class="section-label">// {{ t('projects.label') }}</span>
-          <h1 class="detail-title">{{ project.title }}</h1>
+          <h1 class="detail-title" id="project-title">{{ project.title }}</h1>
         </div>
 
         <div class="detail-content reveal reveal-delay-1">
           <!--
-            ==============================================================
+            ============================================================== 
             AGREGAR IMAGEN DEL PROYECTO:
             Coloca la imagen en /public/images/proyecto-{id}.jpg
             y descomenta el bloque de abajo. Asegúrate de que
             project.image tenga la ruta correcta en data/projects.js.
-            ==============================================================
+            ============================================================== 
           <div class="detail-image-wrapper" v-if="project.image">
             <img :src="project.image" :alt="project.title" class="detail-image" />
           </div>
@@ -30,24 +30,24 @@
           </div>
 
           <div class="detail-info">
-            <p class="detail-description">{{ project.description }}</p>
+            <p class="detail-description" :aria-label="`Descripción del proyecto: ${project.description}`">{{ project.description }}</p>
 
             <div class="detail-tags">
-              <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+              <span v-for="tag in project.tags" :key="tag" class="tag" :aria-label="`Etiqueta: ${tag}`">{{ tag }}</span>
             </div>
 
             <div class="detail-links" v-if="project.demo || project.code">
-              <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-primary">
+              <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-primary" aria-label="Ver demo del proyecto">
                 {{ t('projects.demo') }}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
                   <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
               </a>
-              <a v-if="project.code" :href="project.code" target="_blank" class="btn btn-outline">
+              <a v-if="project.code" :href="project.code" target="_blank" class="btn btn-outline" aria-label="Ver código del proyecto">
                 {{ t('projects.code') }}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <polyline points="16 18 22 12 16 6"></polyline>
                   <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>

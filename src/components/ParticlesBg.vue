@@ -21,6 +21,9 @@ onMounted(() => {
   resize()
   window.addEventListener('resize', resize)
 
+  // Verificar si el dispositivo tiene baja capacidad de renderizado
+  const isLowPerformanceDevice = navigator.hardwareConcurrency <= 4 || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches)
+
   class Particle {
     constructor() {
       this.x = Math.random() * cvs.width
@@ -59,7 +62,9 @@ onMounted(() => {
 
   function init() {
     particles = []
-    const count = Math.min(Math.floor((cvs.width * cvs.height) / 9000), 80)
+    // Reducir el número de partículas en dispositivos móviles o con baja potencia
+    const baseCount = Math.min(Math.floor((cvs.width * cvs.height) / 9000), 80)
+    const count = isLowPerformanceDevice ? Math.max(10, Math.floor(baseCount / 2)) : baseCount
     for (let i = 0; i < count; i++) {
       particles.push(new Particle())
     }
@@ -71,18 +76,21 @@ onMounted(() => {
     for (let i = 0; i < particles.length; i++) {
       particles[i].update()
       particles[i].draw()
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x
-        const dy = particles[i].y - particles[j].y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-        if (dist < 120) {
-          ctx.beginPath()
-          ctx.moveTo(particles[i].x, particles[i].y)
-          ctx.lineTo(particles[j].x, particles[j].y)
-          ctx.strokeStyle = getComputedStyle(document.documentElement)
-            .getPropertyValue('--particle-line').trim() || 'rgba(99, 102, 241, 0.08)'
-          ctx.lineWidth = 0.6
-          ctx.stroke()
+      // Reducir la cantidad de conexiones entre partículas en dispositivos móviles
+      if (!isLowPerformanceDevice) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x
+          const dy = particles[i].y - particles[j].y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 120) {
+            ctx.beginPath()
+            ctx.moveTo(particles[i].x, particles[i].y)
+            ctx.lineTo(particles[j].x, particles[j].y)
+            ctx.strokeStyle = getComputedStyle(document.documentElement)
+              .getPropertyValue('--particle-line').trim() || 'rgba(99, 102, 241, 0.08)'
+            ctx.lineWidth = 0.6
+            ctx.stroke()
+          }
         }
       }
     }
@@ -96,10 +104,34 @@ onMounted(() => {
   }
   window.addEventListener('mousemove', onMouse)
 
+  // Detener animación cuando el usuario no está interactuando
+  let lastInteractionTime = Date.now()
+  const interactionTimeout = 3000 // 3 segundos sin interacción
+
+  function resetInteractionTimer() {
+    lastInteractionTime = Date.now()
+  }
+
+  window.addEventListener('mousemove', resetInteractionTimer)
+  window.addEventListener('touchstart', resetInteractionTimer)
+  window.addEventListener('click', resetInteractionTimer)
+
+  // Verificar si el usuario está interactuando cada segundo
+  setInterval(() => {
+    if (Date.now() - lastInteractionTime > interactionTimeout) {
+      // Si no hay interacción durante 3 segundos, pausar la animación
+      cancelAnimationFrame(animationId)
+      // Reanudar la animación si el usuario vuelve a interactuar
+      animationId = requestAnimationFrame(animate)
+    }
+  }, 1000)
+
   onUnmounted(() => {
     cancelAnimationFrame(animationId)
     window.removeEventListener('resize', resize)
     window.removeEventListener('mousemove', onMouse)
+    window.removeEventListener('touchstart', resetInteractionTimer)
+    window.removeEventListener('click', resetInteractionTimer)
   })
 })
 </script>

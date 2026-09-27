@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/proyecto/${project.id}`" class="project-card reveal" :class="`reveal-delay-${Math.min(delay + 1, 4)}`">
+  <router-link :to="`/proyecto/${project.id}`" class="project-card reveal" :class="`reveal-delay-${Math.min(delay + 1, 4)}`" role="article" :aria-label="`${project.title}: ${project.description}`">
     <div class="project-illustration">
       <!--
         ================================================================
@@ -22,10 +22,10 @@
     </div>
     <div class="project-body">
       <div class="project-tags">
-        <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+        <span v-for="tag in project.tags" :key="tag" class="tag" :aria-label="`Etiqueta: ${tag}`">{{ tag }}</span>
       </div>
-      <h3 class="project-title">{{ project.title }}</h3>
-      <p class="project-description">{{ project.description }}</p>
+      <h3 class="project-title" :aria-label="`Proyecto: ${project.title}`">{{ project.title }}</h3>
+      <p class="project-description" :aria-label="`Descripción: ${project.description}`">{{ project.description }}</p>
     </div>
   </router-link>
 </template>
