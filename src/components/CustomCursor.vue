@@ -1,6 +1,6 @@
 <template>
-  <div class="cursor-dot" :class="{ visible: isVisible }" :style="dotStyle"></div>
-  <div class="cursor-ring" :class="{ visible: isVisible }" :style="ringStyle"></div>
+  <div class="cursor-dot" :class="{ visible: isVisible }" :style="dotStyle" aria-hidden="true"></div>
+  <div class="cursor-ring" :class="{ visible: isVisible }" :style="ringStyle" aria-hidden="true"></div>
 </template>
 
 <script setup>
@@ -10,6 +10,11 @@ const pos = ref({ x: 0, y: 0 })
 const target = ref({ x: 0, y: 0 })
 const isVisible = ref(false)
 const isHovering = ref(false)
+
+// Verificar si el dispositivo tiene entrada táctil (como pantallas táctiles)
+const isTouchDevice = () => {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0
+}
 
 function onMouse(e) {
   target.value = { x: e.clientX, y: e.clientY }
@@ -37,24 +42,31 @@ const ringStyle = computed(() => ({
 }))
 
 function animate() {
-  pos.value.x += (target.value.x - pos.value.x) * 0.15
-  pos.value.y += (target.value.y - pos.value.y) * 0.15
+  // Usar una interpolación más suave para dispositivos móviles
+  const speed = isTouchDevice() ? 0.08 : 0.15
+  pos.value.x += (target.value.x - pos.value.x) * speed
+  pos.value.y += (target.value.y - pos.value.y) * speed
   requestAnimationFrame(animate)
 }
 
 onMounted(() => {
-  document.querySelectorAll('a, button, .btn, .project-card, .contact-card, .skill-chip').forEach(el => {
-    el.addEventListener('mouseenter', onLinkEnter)
-    el.addEventListener('mouseleave', onLinkLeave)
-  })
-  document.addEventListener('mousemove', onMouse)
-  document.addEventListener('mouseleave', onMouseLeave)
-  animate()
+  // Solo inicializar el cursor si no es un dispositivo táctil
+  if (!isTouchDevice()) {
+    document.querySelectorAll('a, button, .btn, .project-card, .contact-card, .skill-chip').forEach(el => {
+      el.addEventListener('mouseenter', onLinkEnter)
+      el.addEventListener('mouseleave', onLinkLeave)
+    })
+    document.addEventListener('mousemove', onMouse)
+    document.addEventListener('mouseleave', onMouseLeave)
+    animate()
+  }
 })
 
 onUnmounted(() => {
-  document.removeEventListener('mousemove', onMouse)
-  document.removeEventListener('mouseleave', onMouseLeave)
+  if (!isTouchDevice()) {
+    document.removeEventListener('mousemove', onMouse)
+    document.removeEventListener('mouseleave', onMouseLeave)
+  }
 })
 </script>
 
@@ -92,7 +104,17 @@ onUnmounted(() => {
   margin: -16px 0 0 -16px;
 }
 
+/* Ocultar el cursor personalizado en dispositivos táctiles */
 @media (pointer: coarse) {
   .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* Añadir soporte para usuarios que prefieren reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot, .cursor-ring {
+    opacity: 0 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 </style>

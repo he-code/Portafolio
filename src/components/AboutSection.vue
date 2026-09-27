@@ -1,9 +1,9 @@
 <template>
-  <section id="about" class="section">
+  <section id="about" class="section" role="region" aria-labelledby="about-heading">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">// {{ t('about.label') }}</span>
-        <h2 class="section-title">{{ t('about.title') }}</h2>
+        <h2 id="about-heading" class="section-title">{{ t('about.title') }}</h2>
       </div>
       <div class="about-grid">
         <div class="about-text reveal reveal-delay-1">

@@ -1,9 +1,9 @@
 <template>
-  <section class="section">
+  <section class="section" role="region" aria-labelledby="testimonials-heading">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">// {{ t('testimonials.label') }}</span>
-        <h2 class="section-title">{{ t('testimonials.title') }} <span class="gradient-text">❤</span></h2>
+        <h2 id="testimonials-heading" class="section-title">{{ t('testimonials.title') }} <span class="gradient-text">❤</span></h2>
       </div>
       <div class="testimonials-track" ref="track">
         <div
@@ -12,6 +12,9 @@
           class="testimonial-card"
           :class="{ active: current === t.id }"
           @click="current = t.id"
+          :role="current === t.id ? 'article' : 'button'"
+          :aria-pressed="current === t.id"
+          :aria-label="`Testimonio de ${t.name}: ${t.text}`"
         >
           <div class="testimonial-avatar">
             <!-- AGREGAR AVATAR: Coloca /public/images/avatar-{id}.jpg y descomenta:
@@ -19,7 +22,7 @@
             -->
             <div class="avatar-placeholder">{{ t.name.charAt(0) }}</div>
           </div>
-          <blockquote class="testimonial-text">"{{ t.text }}"</blockquote>
+          <blockquote class="testimonial-text" :aria-label="`Testimonio: ${t.text}`">"{{ t.text }}"</blockquote>
           <div class="testimonial-author">
             <strong>{{ t.name }}</strong>
             <span>{{ t.role }}</span>
@@ -32,7 +35,8 @@
           :key="t.id"
           :class="{ active: current === t.id }"
           @click="current = t.id"
-          :aria-label="`Testimonio ${t.id}`"
+          :aria-label="`Testimonio ${t.id} de ${testimonials.length}`"
+          :aria-current="current === t.id ? 'true' : 'false'"
         ></button>
       </div>
     </div>

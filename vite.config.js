@@ -28,6 +28,43 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        // Agregar configuración para mejor rendimiento de PWA
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 año
+              },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'gstatic-fonts-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 año
+              },
+            },
+          },
+        ],
+      },
     }),
   ],
+  // Configuración adicional para optimización
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router', '@vueuse/head'],
+        },
+      },
+    },
+  },
 })
