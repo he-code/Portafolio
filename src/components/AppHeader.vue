@@ -15,22 +15,6 @@
         <li role="none"><a href="/#skills" @click="menuOpen = false" role="menuitem">{{ t('nav.skills') }}</a></li>
         <li role="none"><a href="/#contact" @click="menuOpen = false" role="menuitem">{{ t('nav.contact') }}</a></li>
         <li class="nav-actions" role="none">
-          <button class="icon-btn" @click="toggleTheme()" :aria-label="theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro'" :title="theme === 'dark' ? 'Modo claro' : 'Modo oscuro'">
-            <svg v-if="theme === 'dark'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          </button>
           <button class="icon-btn lang-btn" @click="setLocale(isES ? 'en' : 'es')" :aria-label="isES ? 'Cambiar idioma a inglés' : 'Cambiar idioma a español'">
             {{ isES ? 'EN' : 'ES' }}
           </button>
@@ -42,10 +26,8 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useTheme } from '../composables/useTheme.js'
 import { useI18n } from '../composables/useI18n.js'
 
-const { theme, toggleTheme } = useTheme()
 const { t, locale, setLocale, isES } = useI18n()
 
 const scrolled = ref(false)
@@ -74,10 +56,6 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   background: rgba(8, 8, 12, 0.85);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
-}
-
-[data-theme="light"] .header-scrolled {
-  background: rgba(250, 250, 250, 0.85);
 }
 
 .header-nav {
@@ -198,10 +176,6 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     border-bottom: 1px solid var(--border);
     transform: translateY(-120%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  [data-theme="light"] .nav-links {
-    background: rgba(250, 250, 250, 0.95);
   }
 
   .nav-links.nav-open { transform: translateY(0); }

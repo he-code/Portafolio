@@ -17,13 +17,13 @@
 
 ---
 
-Portafolio web construido con **Vue.js 3 + Vite**. Diseño oscuro con modo claro, animaciones sutiles, partículas interactivas y PWA lista para instalar.
+Portafolio web construido con **Vue.js 3 + Vite**. Diseño oscuro, animaciones sutiles, partículas interactivas y PWA lista para instalar.
 
 ## ✨ Características
 
 | | |
 |---|---|
-| 🌗 **Modo claro/oscuro** | Toggle con persistencia en `localStorage` |
+| 🌑 **Modo oscuro** | Diseño oscuro único, sin toggle |
 | 🌐 **i18n** | Español e inglés completos, cambio en un clic |
 | 🧩 **Partículas interactivas** | Fondo animado que reacciona al mouse |
 | 🖱️ **Cursor personalizado** | Efecto magnético en enlaces y botones |
