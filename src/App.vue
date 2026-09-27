@@ -27,12 +27,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useHead } from '@vueuse/head'
-import { useTheme } from './composables/useTheme.js'
 import AppHeader from './components/AppHeader.vue'
 import ParticlesBg from './components/ParticlesBg.vue'
 import CustomCursor from './components/CustomCursor.vue'
-
-useTheme()
 
 useHead({
   title: 'Portafolio · Desarrollador Full Stack',

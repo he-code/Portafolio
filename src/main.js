@@ -9,4 +9,8 @@ const head = createHead()
 
 app.use(router)
 app.use(head)
+
+// Modo oscuro único: eliminar la preferencia de tema guardada por versiones anteriores
+localStorage.removeItem('theme')
+
 app.mount('#app')
