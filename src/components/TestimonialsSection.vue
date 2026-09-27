@@ -3,7 +3,9 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">// {{ t('testimonials.label') }}</span>
-        <h2 id="testimonials-heading" class="section-title">{{ t('testimonials.title') }} <span class="gradient-text">❤</span></h2>
+        <h2 id="testimonials-heading" class="section-title">
+          {{ t('testimonials.title') }} <span class="gradient-text">❤</span>
+        </h2>
       </div>
       <div class="testimonials-track" ref="track">
         <div
@@ -44,13 +46,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { testimonials } from '../data/testimonials.js'
-import { useI18n } from '../composables/useI18n.js'
-import { useReveal } from '../composables/useReveal.js'
-useReveal()
-const { t } = useI18n()
-const current = ref(1)
+import { ref } from 'vue';
+import { testimonials } from '../data/testimonials.js';
+import { useI18n } from '../composables/useI18n.js';
+import { useReveal } from '../composables/useReveal.js';
+useReveal();
+const { t } = useI18n();
+const current = ref(1);
 </script>
 
 <style scoped>
@@ -148,6 +150,8 @@ const current = ref(1)
 }
 
 @media (min-width: 768px) {
-  .testimonial-dots { display: none; }
+  .testimonial-dots {
+    display: none;
+  }
 }
 </style>

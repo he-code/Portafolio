@@ -6,7 +6,8 @@ export const experience = [
     title: 'Desarrollador Full Stack Senior',
     titleEn: 'Senior Full Stack Developer',
     company: 'TechCorp',
-    description: 'Lideré el desarrollo de una plataforma SaaS utilizada por más de 10,000 usuarios. Arquitectura basada en microservicios con Vue.js y Node.js.',
+    description:
+      'Lideré el desarrollo de una plataforma SaaS utilizada por más de 10,000 usuarios. Arquitectura basada en microservicios con Vue.js y Node.js.',
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ export const experience = [
     title: 'Desarrollador Frontend',
     titleEn: 'Frontend Developer',
     company: 'StartupX',
-    description: 'Construcción de interfaces interactivas con Vue.js y React. Implementación de sistema de diseño y pruebas automatizadas.',
+    description:
+      'Construcción de interfaces interactivas con Vue.js y React. Implementación de sistema de diseño y pruebas automatizadas.',
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ export const experience = [
     title: 'Desarrollador Junior',
     titleEn: 'Junior Developer',
     company: 'WebStudio',
-    description: 'Desarrollo de aplicaciones web con tecnologías modernas. Participación en proyectos ágiles con equipos multidisciplinarios.',
+    description:
+      'Desarrollo de aplicaciones web con tecnologías modernas. Participación en proyectos ágiles con equipos multidisciplinarios.',
   },
-]
+];

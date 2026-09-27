@@ -26,11 +26,11 @@
 </template>
 
 <script setup>
-import { experience } from '../data/experience.js'
-import { useI18n } from '../composables/useI18n.js'
-import { useReveal } from '../composables/useReveal.js'
-useReveal()
-const { t, isES } = useI18n()
+import { experience } from '../data/experience.js';
+import { useI18n } from '../composables/useI18n.js';
+import { useReveal } from '../composables/useReveal.js';
+useReveal();
+const { t, isES } = useI18n();
 </script>
 
 <style scoped>

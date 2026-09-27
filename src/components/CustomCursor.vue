@@ -4,70 +4,70 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-const pos = ref({ x: 0, y: 0 })
-const target = ref({ x: 0, y: 0 })
-const isVisible = ref(false)
-const isHovering = ref(false)
+const pos = ref({ x: 0, y: 0 });
+const target = ref({ x: 0, y: 0 });
+const isVisible = ref(false);
+const isHovering = ref(false);
 
 // Verificar si el dispositivo tiene entrada táctil (como pantallas táctiles)
 const isTouchDevice = () => {
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0
-}
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+};
 
 function onMouse(e) {
-  target.value = { x: e.clientX, y: e.clientY }
-  if (!isVisible.value) isVisible.value = true
+  target.value = { x: e.clientX, y: e.clientY };
+  if (!isVisible.value) isVisible.value = true;
 }
 
 function onMouseLeave() {
-  isVisible.value = false
+  isVisible.value = false;
 }
 
 function onLinkEnter() {
-  isHovering.value = true
+  isHovering.value = true;
 }
 
 function onLinkLeave() {
-  isHovering.value = false
+  isHovering.value = false;
 }
 
 const dotStyle = computed(() => ({
   transform: `translate(${pos.value.x}px, ${pos.value.y}px)`,
-}))
+}));
 
 const ringStyle = computed(() => ({
   transform: `translate(${pos.value.x}px, ${pos.value.y}px) scale(${isHovering.value ? 1.5 : 1})`,
-}))
+}));
 
 function animate() {
   // Usar una interpolación más suave para dispositivos móviles
-  const speed = isTouchDevice() ? 0.08 : 0.15
-  pos.value.x += (target.value.x - pos.value.x) * speed
-  pos.value.y += (target.value.y - pos.value.y) * speed
-  requestAnimationFrame(animate)
+  const speed = isTouchDevice() ? 0.08 : 0.15;
+  pos.value.x += (target.value.x - pos.value.x) * speed;
+  pos.value.y += (target.value.y - pos.value.y) * speed;
+  requestAnimationFrame(animate);
 }
 
 onMounted(() => {
   // Solo inicializar el cursor si no es un dispositivo táctil
   if (!isTouchDevice()) {
     document.querySelectorAll('a, button, .btn, .project-card, .contact-card, .skill-chip').forEach(el => {
-      el.addEventListener('mouseenter', onLinkEnter)
-      el.addEventListener('mouseleave', onLinkLeave)
-    })
-    document.addEventListener('mousemove', onMouse)
-    document.addEventListener('mouseleave', onMouseLeave)
-    animate()
+      el.addEventListener('mouseenter', onLinkEnter);
+      el.addEventListener('mouseleave', onLinkLeave);
+    });
+    document.addEventListener('mousemove', onMouse);
+    document.addEventListener('mouseleave', onMouseLeave);
+    animate();
   }
-})
+});
 
 onUnmounted(() => {
   if (!isTouchDevice()) {
-    document.removeEventListener('mousemove', onMouse)
-    document.removeEventListener('mouseleave', onMouseLeave)
+    document.removeEventListener('mousemove', onMouse);
+    document.removeEventListener('mouseleave', onMouseLeave);
   }
-})
+});
 </script>
 
 <style scoped>
@@ -106,12 +106,16 @@ onUnmounted(() => {
 
 /* Ocultar el cursor personalizado en dispositivos táctiles */
 @media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
 }
 
 /* Añadir soporte para usuarios que prefieren reducir animaciones */
 @media (prefers-reduced-motion: reduce) {
-  .cursor-dot, .cursor-ring {
+  .cursor-dot,
+  .cursor-ring {
     opacity: 0 !important;
     transform: none !important;
     transition: none !important;

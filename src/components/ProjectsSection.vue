@@ -12,41 +12,38 @@
           :key="f.key"
           :class="{ active: activeFilter === f.key }"
           @click="activeFilter = f.key"
-        >{{ f.label }}</button>
+        >
+          {{ f.label }}
+        </button>
       </div>
 
       <div class="projects-grid">
-        <ProjectCard
-          v-for="(project, index) in filtered"
-          :key="project.id"
-          :project="project"
-          :delay="index"
-        />
+        <ProjectCard v-for="(project, index) in filtered" :key="project.id" :project="project" :delay="index" />
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import ProjectCard from './ProjectCard.vue'
-import { projects } from '../data/projects.js'
-import { useReveal } from '../composables/useReveal.js'
-import { useI18n } from '../composables/useI18n.js'
-useReveal()
-const { t } = useI18n()
+import { ref, computed } from 'vue';
+import ProjectCard from './ProjectCard.vue';
+import { projects } from '../data/projects.js';
+import { useReveal } from '../composables/useReveal.js';
+import { useI18n } from '../composables/useI18n.js';
+useReveal();
+const { t } = useI18n();
 
-const activeFilter = ref('all')
+const activeFilter = ref('all');
 
 const filters = computed(() => {
-  const tags = [...new Set(projects.flatMap(p => p.tags))]
-  return [{ key: 'all', label: t('projects.filter_all') }, ...tags.map(t => ({ key: t, label: t }))]
-})
+  const tags = [...new Set(projects.flatMap(p => p.tags))];
+  return [{ key: 'all', label: t('projects.filter_all') }, ...tags.map(t => ({ key: t, label: t }))];
+});
 
 const filtered = computed(() => {
-  if (activeFilter.value === 'all') return projects
-  return projects.filter(p => p.tags.includes(activeFilter.value))
-})
+  if (activeFilter.value === 'all') return projects;
+  return projects.filter(p => p.tags.includes(activeFilter.value));
+});
 </script>
 
 <style scoped>

@@ -1,7 +1,9 @@
 <template>
   <div class="project-detail">
     <div class="container">
-      <router-link to="/" class="back-link" aria-label="Volver a la página principal">{{ t('projects.back') }}</router-link>
+      <router-link to="/" class="back-link" aria-label="Volver a la página principal">{{
+        t('projects.back')
+      }}</router-link>
 
       <template v-if="project">
         <div class="detail-header reveal">
@@ -23,31 +25,64 @@
           -->
           <div class="detail-placeholder">
             <div class="placeholder-grid">
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span>
+              <span></span><span></span><span></span> <span></span><span></span><span></span> <span></span><span></span
+              ><span></span>
             </div>
           </div>
 
           <div class="detail-info">
-            <p class="detail-description" :aria-label="`Descripción del proyecto: ${project.description}`">{{ project.description }}</p>
+            <p class="detail-description" :aria-label="`Descripción del proyecto: ${project.description}`">
+              {{ project.description }}
+            </p>
 
             <div class="detail-tags">
               <span v-for="tag in project.tags" :key="tag" class="tag" :aria-label="`Etiqueta: ${tag}`">{{ tag }}</span>
             </div>
 
             <div class="detail-links" v-if="project.demo || project.code">
-              <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-primary" aria-label="Ver demo del proyecto">
+              <a
+                v-if="project.demo"
+                :href="project.demo"
+                target="_blank"
+                class="btn btn-primary"
+                aria-label="Ver demo del proyecto"
+              >
                 {{ t('projects.demo') }}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
                   <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
               </a>
-              <a v-if="project.code" :href="project.code" target="_blank" class="btn btn-outline" aria-label="Ver código del proyecto">
+              <a
+                v-if="project.code"
+                :href="project.code"
+                target="_blank"
+                class="btn btn-outline"
+                aria-label="Ver código del proyecto"
+              >
                 {{ t('projects.code') }}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
                   <polyline points="16 18 22 12 16 6"></polyline>
                   <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>
@@ -67,15 +102,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { projects } from '../data/projects.js'
-import { useI18n } from '../composables/useI18n.js'
-import { useReveal } from '../composables/useReveal.js'
-useReveal()
-const { t } = useI18n()
-const route = useRoute()
-const project = computed(() => projects.find(p => p.id === Number(route.params.id)))
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { projects } from '../data/projects.js';
+import { useI18n } from '../composables/useI18n.js';
+import { useReveal } from '../composables/useReveal.js';
+useReveal();
+const { t } = useI18n();
+const route = useRoute();
+const project = computed(() => projects.find(p => p.id === Number(route.params.id)));
 </script>
 
 <style scoped>
@@ -149,18 +184,41 @@ const project = computed(() => projects.find(p => p.id === Number(route.params.i
   animation: gridPulse 2s ease-in-out infinite;
 }
 
-.placeholder-grid span:nth-child(2) { animation-delay: 0.2s; }
-.placeholder-grid span:nth-child(3) { animation-delay: 0.4s; }
-.placeholder-grid span:nth-child(4) { animation-delay: 0.1s; }
-.placeholder-grid span:nth-child(5) { animation-delay: 0.3s; }
-.placeholder-grid span:nth-child(6) { animation-delay: 0.5s; }
-.placeholder-grid span:nth-child(7) { animation-delay: 0.15s; }
-.placeholder-grid span:nth-child(8) { animation-delay: 0.35s; }
-.placeholder-grid span:nth-child(9) { animation-delay: 0.55s; }
+.placeholder-grid span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.placeholder-grid span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.placeholder-grid span:nth-child(4) {
+  animation-delay: 0.1s;
+}
+.placeholder-grid span:nth-child(5) {
+  animation-delay: 0.3s;
+}
+.placeholder-grid span:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.placeholder-grid span:nth-child(7) {
+  animation-delay: 0.15s;
+}
+.placeholder-grid span:nth-child(8) {
+  animation-delay: 0.35s;
+}
+.placeholder-grid span:nth-child(9) {
+  animation-delay: 0.55s;
+}
 
 @keyframes gridPulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.1); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
 .detail-description {
