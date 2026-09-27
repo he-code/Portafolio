@@ -20,4 +20,4 @@ export const testimonials = [
     text: 'Colaboramos en varios proyectos y siempre superó mis expectativas. Tiene un ojo increíble para el detalle y la experiencia de usuario.',
     avatar: null,
   },
-]
+];

@@ -6,7 +6,8 @@ export default {
     role_1: 'Desarrollador Full Stack',
     role_2: 'Creador de experiencias web',
     role_3: 'Amante del código limpio',
-    description: 'Construyo aplicaciones web modernas con foco en experiencia de usuario, rendimiento y código limpio. Especializado en Vue.js, Node.js y Python.',
+    description:
+      'Construyo aplicaciones web modernas con foco en experiencia de usuario, rendimiento y código limpio. Especializado en Vue.js, Node.js y Python.',
     btn_projects: 'Ver proyectos',
     btn_contact: 'Contactar',
   },
@@ -59,4 +60,4 @@ export default {
     label: 'Experiencia',
     title: 'Mi trayectoria',
   },
-}
+};

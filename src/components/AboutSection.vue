@@ -40,10 +40,10 @@
 </template>
 
 <script setup>
-import { useI18n } from '../composables/useI18n.js'
-import { useReveal } from '../composables/useReveal.js'
-useReveal()
-const { t } = useI18n()
+import { useI18n } from '../composables/useI18n.js';
+import { useReveal } from '../composables/useReveal.js';
+useReveal();
+const { t } = useI18n();
 </script>
 
 <style scoped>
@@ -61,7 +61,9 @@ const { t } = useI18n()
   margin-bottom: 1.2rem;
 }
 
-.about-image-wrapper { margin-top: 2rem; }
+.about-image-wrapper {
+  margin-top: 2rem;
+}
 
 .about-image {
   width: 100%;
@@ -70,7 +72,11 @@ const { t } = useI18n()
   border: 1px solid var(--border);
 }
 
-.about-stats { display: flex; flex-direction: column; gap: 1rem; }
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 .stat-card {
   background: var(--bg-card);
@@ -87,12 +93,31 @@ const { t } = useI18n()
   box-shadow: var(--shadow);
 }
 
-.stat-number { display: block; font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.4rem; }
-.stat-label { font-size: 0.82rem; color: var(--text-muted); }
+.stat-number {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
 
 @media (max-width: 768px) {
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .about-stats { flex-direction: row; flex-wrap: wrap; }
-  .stat-card { flex: 1; min-width: 140px; }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    flex: 1;
+    min-width: 140px;
+  }
 }
 </style>

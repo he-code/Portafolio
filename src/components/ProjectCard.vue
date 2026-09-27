@@ -1,5 +1,11 @@
 <template>
-  <router-link :to="`/proyecto/${project.id}`" class="project-card reveal" :class="`reveal-delay-${Math.min(delay + 1, 4)}`" role="article" :aria-label="`${project.title}: ${project.description}`">
+  <router-link
+    :to="`/proyecto/${project.id}`"
+    class="project-card reveal"
+    :class="`reveal-delay-${Math.min(delay + 1, 4)}`"
+    role="article"
+    :aria-label="`${project.title}: ${project.description}`"
+  >
     <div class="project-illustration">
       <!--
         ================================================================
@@ -12,8 +18,7 @@
       -->
       <div class="project-placeholder">
         <div class="placeholder-grid">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
+          <span></span><span></span><span></span> <span></span><span></span><span></span>
         </div>
       </div>
       <div class="project-overlay">
@@ -31,13 +36,13 @@
 </template>
 
 <script setup>
-import { useI18n } from '../composables/useI18n.js'
-const { t } = useI18n()
+import { useI18n } from '../composables/useI18n.js';
+const { t } = useI18n();
 
 defineProps({
   project: { type: Object, required: true },
   delay: { type: Number, default: 0 },
-})
+});
 </script>
 
 <style scoped>
@@ -64,8 +69,15 @@ defineProps({
   background: var(--bg-secondary);
 }
 
-.project-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-.project-card:hover .project-image { transform: scale(1.05); }
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
 
 .project-placeholder {
   width: 100%;
@@ -90,15 +102,32 @@ defineProps({
   animation: gridPulse 2s ease-in-out infinite;
 }
 
-.placeholder-grid span:nth-child(2) { animation-delay: 0.2s; }
-.placeholder-grid span:nth-child(3) { animation-delay: 0.4s; }
-.placeholder-grid span:nth-child(4) { animation-delay: 0.1s; }
-.placeholder-grid span:nth-child(5) { animation-delay: 0.3s; }
-.placeholder-grid span:nth-child(6) { animation-delay: 0.5s; }
+.placeholder-grid span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.placeholder-grid span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.placeholder-grid span:nth-child(4) {
+  animation-delay: 0.1s;
+}
+.placeholder-grid span:nth-child(5) {
+  animation-delay: 0.3s;
+}
+.placeholder-grid span:nth-child(6) {
+  animation-delay: 0.5s;
+}
 
 @keyframes gridPulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.1); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
 .project-overlay {
@@ -113,7 +142,9 @@ defineProps({
   transition: opacity 0.4s ease;
 }
 
-.project-card:hover .project-overlay { opacity: 1; }
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
 
 .overlay-text {
   font-size: 0.85rem;
@@ -123,7 +154,9 @@ defineProps({
   padding-bottom: 2px;
 }
 
-.project-body { padding: 1.5rem; }
+.project-body {
+  padding: 1.5rem;
+}
 
 .project-tags {
   display: flex;

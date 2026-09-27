@@ -1,20 +1,21 @@
 export default {
   nav: { about: 'About', projects: 'Projects', skills: 'Skills', contact: 'Contact' },
   hero: {
-    greeting: 'hello, I\'m',
+    greeting: "hello, I'm",
     name: 'Your Name',
     role_1: 'Full Stack Developer',
     role_2: 'Web Experience Creator',
     role_3: 'Clean Code Lover',
-    description: 'I build modern web applications focused on user experience, performance, and clean code. Specialized in Vue.js, Node.js and Python.',
+    description:
+      'I build modern web applications focused on user experience, performance, and clean code. Specialized in Vue.js, Node.js and Python.',
     btn_projects: 'View projects',
     btn_contact: 'Get in touch',
   },
   about: {
     label: 'About',
     title: 'Get to know me a little more',
-    p1: 'I\'m a software developer with experience building modern, scalable web applications. I work on both frontend and backend, always seeking the balance between clean design and solid code.',
-    p2: 'I\'m driven by solving real problems through technology, collaborating in teams, and learning something new every day. When I\'m not coding, you\'ll find me exploring new tools or taking photographs.',
+    p1: "I'm a software developer with experience building modern, scalable web applications. I work on both frontend and backend, always seeking the balance between clean design and solid code.",
+    p2: "I'm driven by solving real problems through technology, collaborating in teams, and learning something new every day. When I'm not coding, you'll find me exploring new tools or taking photographs.",
     stat_1: 'Years of experience',
     stat_2: 'Completed projects',
     stat_3: 'Technologies mastered',
@@ -27,7 +28,7 @@ export default {
     demo: 'Demo',
     code: 'Code',
     not_found_title: 'Project not found',
-    not_found_msg: 'The project you\'re looking for doesn\'t exist.',
+    not_found_msg: "The project you're looking for doesn't exist.",
     back: '← Back to home',
   },
   skills: {
@@ -36,8 +37,8 @@ export default {
   },
   contact: {
     label: 'Contact',
-    title: 'Let\'s talk about your project',
-    text: 'Got an idea, a project, or just want to connect? I\'m always open to talk about technology, collaborations, and new opportunities.',
+    title: "Let's talk about your project",
+    text: "Got an idea, a project, or just want to connect? I'm always open to talk about technology, collaborations, and new opportunities.",
     available: 'Available for new projects',
     email: 'Email',
     github: 'GitHub',
@@ -59,4 +60,4 @@ export default {
     label: 'Experience',
     title: 'My journey',
   },
-}
+};

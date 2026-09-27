@@ -11,13 +11,17 @@
       </Transition>
     </router-view>
 
-    <button
-      v-if="showScrollTop"
-      class="scroll-top"
-      @click="scrollToTop"
-      aria-label="Volver arriba"
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <button v-if="showScrollTop" class="scroll-top" @click="scrollToTop" aria-label="Volver arriba">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <polyline points="18 15 12 9 6 15"></polyline>
       </svg>
     </button>
@@ -25,11 +29,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useHead } from '@vueuse/head'
-import AppHeader from './components/AppHeader.vue'
-import ParticlesBg from './components/ParticlesBg.vue'
-import CustomCursor from './components/CustomCursor.vue'
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useHead } from '@vueuse/head';
+import AppHeader from './components/AppHeader.vue';
+import ParticlesBg from './components/ParticlesBg.vue';
+import CustomCursor from './components/CustomCursor.vue';
 
 useHead({
   title: 'Portafolio · Desarrollador Full Stack',
@@ -40,26 +44,28 @@ useHead({
     { property: 'og:description', content: 'Portafolio profesional de [Tu Nombre] — Desarrollador Full Stack' },
     { property: 'og:type', content: 'website' },
   ],
-})
+});
 
-const showScrollTop = ref(false)
+const showScrollTop = ref(false);
 
 function onScroll() {
-  showScrollTop.value = window.scrollY > 400
+  showScrollTop.value = window.scrollY > 400;
 }
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-onMounted(() => window.addEventListener('scroll', onScroll))
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
+onMounted(() => window.addEventListener('scroll', onScroll));
+onUnmounted(() => window.removeEventListener('scroll', onScroll));
 </script>
 
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .page-enter-from {
