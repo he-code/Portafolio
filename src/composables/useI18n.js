@@ -5,6 +5,9 @@ import en from '../i18n/en.js';
 const locale = ref(localStorage.getItem('locale') || 'es');
 const messages = { es, en };
 
+// Sincronizar <html lang> con el idioma activo (SEO y accesibilidad)
+document.documentElement.setAttribute('lang', locale.value);
+
 export function useI18n() {
   function t(key) {
     return key.split('.').reduce((obj, k) => obj?.[k], messages[locale.value]) ?? key;
@@ -13,6 +16,7 @@ export function useI18n() {
   function setLocale(lng) {
     locale.value = lng;
     localStorage.setItem('locale', lng);
+    document.documentElement.setAttribute('lang', lng);
   }
 
   const isES = computed(() => locale.value === 'es');

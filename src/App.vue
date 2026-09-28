@@ -43,6 +43,9 @@ useHead({
     { property: 'og:title', content: 'Portafolio · Desarrollador Full Stack' },
     { property: 'og:description', content: 'Portafolio profesional de [Tu Nombre] — Desarrollador Full Stack' },
     { property: 'og:type', content: 'website' },
+    // AGREGAR IMAGEN: coloca public/images/og-image.jpg (1200x630 recomendado)
+    { property: 'og:image', content: '/images/og-image.jpg' },
+    { name: 'twitter:card', content: 'summary_large_image' },
   ],
 });
 
