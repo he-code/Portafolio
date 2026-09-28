@@ -162,7 +162,11 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll));
   border: none;
   cursor: pointer;
   padding: 4px;
-  outline: none;
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .menu-line {
