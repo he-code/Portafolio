@@ -1,7 +1,6 @@
 <template>
   <div id="app-root">
     <ParticlesBg />
-    <CustomCursor />
 
     <AppHeader />
 
@@ -33,7 +32,6 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useHead } from '@vueuse/head';
 import AppHeader from './components/AppHeader.vue';
 import ParticlesBg from './components/ParticlesBg.vue';
-import CustomCursor from './components/CustomCursor.vue';
 
 useHead({
   title: 'Portafolio · Desarrollador Full Stack',

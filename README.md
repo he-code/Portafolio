@@ -26,7 +26,6 @@ Portafolio web construido con **Vue.js 3 + Vite**. Diseño oscuro, animaciones s
 | 🌑 **Modo oscuro** | Diseño oscuro único, sin toggle |
 | 🌐 **i18n** | Español e inglés completos, cambio en un clic |
 | 🧩 **Partículas interactivas** | Fondo animado que reacciona al mouse |
-| 🖱️ **Cursor personalizado** | Efecto magnético en enlaces y botones |
 | 🏗️ **Vue Router** | Página de detalle individual para cada proyecto (`/proyecto/:id`) |
 | 🔍 **Filtro de proyectos** | Por tags tecnológicos (Vue.js, React, Node.js…) |
 | 📱 **Responsive** | Adaptado a móviles con menú hamburguesa |
