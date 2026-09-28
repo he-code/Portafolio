@@ -155,7 +155,7 @@
               aria-required="true"
             ></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" :disabled="sending" aria-busy="sending">
+          <button type="submit" class="btn btn-primary" :disabled="sending" :aria-busy="sending ? 'true' : 'false'">
             {{ sending ? t('contact.form_sending') : t('contact.form_send') }}
           </button>
           <p
