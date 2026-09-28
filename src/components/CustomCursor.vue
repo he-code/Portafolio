@@ -10,6 +10,10 @@ const pos = ref({ x: 0, y: 0 });
 const target = ref({ x: 0, y: 0 });
 const isVisible = ref(false);
 const isHovering = ref(false);
+let animationId = null;
+
+// Selector de elementos interactivos para la delegación de eventos
+const HOVER_SELECTOR = 'a, button, .btn, .project-card, .contact-card, .skill-chip';
 
 // Verificar si el dispositivo tiene entrada táctil (como pantallas táctiles)
 const isTouchDevice = () => {
@@ -25,12 +29,17 @@ function onMouseLeave() {
   isVisible.value = false;
 }
 
-function onLinkEnter() {
-  isHovering.value = true;
+// Delegación de eventos en document: cubre elementos de cualquier página SPA
+// y elementos añadidos dinámicamente al DOM. El chequeo de relatedTarget evita
+// parpadeos al cruzar elementos hermanos dentro del mismo enlace.
+function onMouseOver(e) {
+  if (e.target.closest(HOVER_SELECTOR)) isHovering.value = true;
 }
 
-function onLinkLeave() {
-  isHovering.value = false;
+function onMouseOut(e) {
+  const from = e.target.closest(HOVER_SELECTOR);
+  const to = e.relatedTarget ? e.relatedTarget.closest(HOVER_SELECTOR) : null;
+  if (from && !to) isHovering.value = false;
 }
 
 const dotStyle = computed(() => ({
@@ -46,18 +55,16 @@ function animate() {
   const speed = isTouchDevice() ? 0.08 : 0.15;
   pos.value.x += (target.value.x - pos.value.x) * speed;
   pos.value.y += (target.value.y - pos.value.y) * speed;
-  requestAnimationFrame(animate);
+  animationId = requestAnimationFrame(animate);
 }
 
 onMounted(() => {
   // Solo inicializar el cursor si no es un dispositivo táctil
   if (!isTouchDevice()) {
-    document.querySelectorAll('a, button, .btn, .project-card, .contact-card, .skill-chip').forEach(el => {
-      el.addEventListener('mouseenter', onLinkEnter);
-      el.addEventListener('mouseleave', onLinkLeave);
-    });
     document.addEventListener('mousemove', onMouse);
     document.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('mouseover', onMouseOver);
+    document.addEventListener('mouseout', onMouseOut);
     animate();
   }
 });
@@ -66,6 +73,9 @@ onUnmounted(() => {
   if (!isTouchDevice()) {
     document.removeEventListener('mousemove', onMouse);
     document.removeEventListener('mouseleave', onMouseLeave);
+    document.removeEventListener('mouseover', onMouseOver);
+    document.removeEventListener('mouseout', onMouseOut);
+    cancelAnimationFrame(animationId);
   }
 });
 </script>
