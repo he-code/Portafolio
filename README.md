@@ -55,12 +55,14 @@ Portafolio/
 ├── src/
 │   ├── assets/styles/      # Estilos globales (CSS custom properties)
 │   ├── components/         # Componentes Vue (Hero, About, Skills…)
-│   ├── composables/        # Composables (useTheme, useI18n, useReveal)
+│   ├── composables/        # Composables (useI18n, useReveal)
 │   ├── data/               # Datos estáticos (projects, testimonials, experience)
 │   ├── i18n/               # Traducciones ES/EN
 │   ├── router/             # Configuración de Vue Router
 │   └── views/              # Páginas (Home, ProjectDetail)
 ├── index.html
+├── eslint.config.js        # ESLint 9 (flat config)
+├── .prettierrc             # Configuración de Prettier
 ├── package.json
 ├── vite.config.js          # Vite + PWA plugin
 └── .gitignore
@@ -85,6 +87,7 @@ Busca los comentarios `AGREGAR IMAGEN` en los archivos para saber dónde colocar
 - `/public/images/perfil.jpg` — Foto de perfil (Hero)
 - `/public/images/about.jpg` — Imagen personal (About)
 - `/public/images/proyecto-{id}.jpg` — Capturas de pantalla (Proyectos)
+- `/public/images/og-image.jpg` — Imagen para Open Graph (compartidos en redes, 1200x630 recomendado)
 
 ### Redes sociales
 Actualiza los enlaces en `HeroSection.vue` y `ContactSection.vue`:
@@ -124,6 +127,9 @@ npx vercel --prod
 npm run dev       # Servidor de desarrollo
 npm run build     # Build para producción
 npm run preview   # Vista previa del build
+npm run lint      # Lint (ESLint 9 + flat config)
+npm run lint:fix  # Lint con autocorrección
+npm run format    # Formateo con Prettier
 ```
 
 ## 📄 Licencia
